@@ -1,0 +1,14 @@
+[package]
+name = "cellgen-script-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+
+[dependencies]
+arrow = "40.0.0"
+rhai = "1.20.0"
+#rustpython = { version = "0.4.0", features = ["freeze-stdlib"] }
+#rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] }
+boa_engine = { version = "0.19.0" }
+thiserror = "1.0.63"
