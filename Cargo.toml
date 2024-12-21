@@ -11,3 +11,4 @@ rhai = "1.20.0"
 #rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] }
 boa_engine = { version = "0.19.0" }
 thiserror = "1.0.63"
+base64 = "0.22.1"

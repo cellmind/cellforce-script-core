@@ -18,9 +18,10 @@ impl ScriptFunctionRunnerBuilder {
         script: &str,
         func: &str,
     ) -> Result<Arc<dyn ScriptFunctionRunner>, ScriptError> {
+        let script = Self::preprocess(script)?;
         let runner = match lang.to_lowercase().as_str() {
             "rhai" => Arc::new(RhaiFunctionRunner::try_new(
-                script,
+                script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
             // "python" => Arc::new(PythonFunctionRunner::try_new(
@@ -28,7 +29,7 @@ impl ScriptFunctionRunnerBuilder {
             //     func,
             // )?) as Arc<dyn ScriptFunctionRunner>,
             "js" | "javascript" => Arc::new(JavaScriptFunctionRunner::try_new(
-                script,
+                script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
             _ => {
@@ -38,6 +39,24 @@ impl ScriptFunctionRunnerBuilder {
             }
         };
         Ok(runner)
+    }
+
+    pub fn preprocess(script: &str) -> Result<String, ScriptError> {
+        let mut script = script.trim().to_string();
+        if script.starts_with("base64:") {
+            let decoded_script = base64::decode(&script[7..]).map_err(|e| {
+                ScriptError::GeneralError {
+                    msg: format!("failed to decode base64 script: {:?}", e),
+                }
+            })?;
+            let decoded_script = String::from_utf8(decoded_script).map_err(|e| {
+                ScriptError::GeneralError {
+                    msg: format!("failed to convert script to utf8: {:?}", e),
+                }
+            })?;
+            script = decoded_script;
+        }
+        Ok(script)
     }
 }
 
