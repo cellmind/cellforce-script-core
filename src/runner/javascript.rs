@@ -30,7 +30,7 @@ impl JavaScriptFunctionRunner {
 }
 
 impl ScriptFunctionRunner for JavaScriptFunctionRunner {
-    fn str2str(&self, value: &str) -> Result<String, ScriptError> {
+    fn map_in_str_out_str(&self, value: &str) -> Result<String, ScriptError> {
         let call_script = r#"
         {self.func}("{value}")
         "#;
@@ -47,7 +47,7 @@ impl ScriptFunctionRunner for JavaScriptFunctionRunner {
         }
     }
 
-    fn str2bool(&self, value: &str) -> Result<bool, ScriptError> {
+    fn map_in_str_out_bool(&self, value: &str) -> Result<bool, ScriptError> {
         let call_script = r#"
         {self.func}("{value}")
         "#;

@@ -30,7 +30,7 @@ impl RhaiFunctionRunner {
 }
 
 impl ScriptFunctionRunner for RhaiFunctionRunner {
-    fn str2str(&self, value: &str) -> Result<String, ScriptError> {
+    fn map_in_str_out_str(&self, value: &str) -> Result<String, ScriptError> {
         let mut scope = Scope::new();
         let value = value.to_string();
         let result = self
@@ -45,7 +45,7 @@ impl ScriptFunctionRunner for RhaiFunctionRunner {
         Ok(result)
     }
 
-    fn str2bool(&self, value: &str) -> Result<bool, ScriptError> {
+    fn map_in_str_out_bool(&self, value: &str) -> Result<bool, ScriptError> {
         let mut scope = Scope::new();
         let value = value.to_string();
         let result = self
