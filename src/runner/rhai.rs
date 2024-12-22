@@ -60,3 +60,37 @@ impl ScriptFunctionRunner for RhaiFunctionRunner {
         Ok(result)
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_map_in_str_out_str() {
+        let runner = RhaiFunctionRunner::try_new(
+            r#"
+            fn hello(name) {
+                "hello, " + name
+            }
+            "#,
+            "hello",
+        ).unwrap();
+        let result = runner.map_in_str_out_str("world").unwrap();
+        assert_eq!(result, "hello, world");
+    }
+
+    #[test]
+    fn test_map_in_str_out_bool() {
+        let runner = RhaiFunctionRunner::try_new(
+            r#"
+            fn is_world(name) {
+                name == "world"
+            }
+            "#,
+            "is_world",
+        ).unwrap();
+        let result = runner.map_in_str_out_bool("world").unwrap();
+        assert_eq!(result, true);
+    }
+}
