@@ -7,8 +7,19 @@ edition = "2021"
 
 [dependencies]
 rhai = "1.20.0"
-#rustpython = { version = "0.4.0", features = ["freeze-stdlib"] }
-#rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] }
+rustpython = { version = "0.4.0", features = ["freeze-stdlib"] }
+rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] }
 boa_engine = { version = "0.19.0" }
 thiserror = "1.0.63"
 base64 = "0.22.1"
+indexmap = "2.7.0"
+
+swc = "9.0.1"
+swc_core = "9.0.1"
+swc_common = { version = "5.0.0", features = ["tty-emitter"] }
+swc_ecma_ast = "5.0.0"
+swc_ecma_parser = { version = "6.0.1", features = ["verify", "typescript"] }
+swc_ecma_transforms_base = "6.0.2"
+swc_ecma_transforms_typescript = "6.0.0"
+swc_ecma_codegen = "5.0.0"
+swc_ecma_visit = "5.0.0"

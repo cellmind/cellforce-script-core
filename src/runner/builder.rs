@@ -2,7 +2,9 @@ use std::sync::Arc;
 use crate::runner::base::ScriptFunctionRunner;
 use crate::errors::ScriptError;
 use crate::runner::javascript::JavaScriptFunctionRunner;
+use crate::runner::python::PythonFunctionRunner;
 use crate::runner::rhai::RhaiFunctionRunner;
+use crate::runner::typescript::TypeScriptFunctionRunner;
 
 pub struct ScriptFunctionRunnerBuilder {
 }
@@ -24,11 +26,15 @@ impl ScriptFunctionRunnerBuilder {
                 script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
-            // "python" => Arc::new(PythonFunctionRunner::try_new(
-            //     script,
-            //     func,
-            // )?) as Arc<dyn ScriptFunctionRunner>,
+            "py" | "python" => Arc::new(PythonFunctionRunner::try_new(
+                script.as_str(),
+                func,
+            )?) as Arc<dyn ScriptFunctionRunner>,
             "js" | "javascript" => Arc::new(JavaScriptFunctionRunner::try_new(
+                script.as_str(),
+                func,
+            )?) as Arc<dyn ScriptFunctionRunner>,
+            "ts" | "typescript" => Arc::new(TypeScriptFunctionRunner::try_new(
                 script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
