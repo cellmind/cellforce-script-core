@@ -31,13 +31,13 @@ impl JavaScriptFunctionRunner {
 
 impl ScriptFunctionRunner for JavaScriptFunctionRunner {
     fn map_in_str_out_str(&self, value: &str) -> Result<String, ScriptError> {
-        let call_script = r#"
-        {self.func}("{value}")
-        "#;
+        let call_script = format!(r#"
+        {}("{}")
+        "#, self.func, value);
         let result = self
             .js_context
             .borrow_mut()
-            .eval(Source::from_bytes(call_script))
+            .eval(Source::from_bytes(call_script.as_str()))
             .map_err(|e| e.to_string())?;
         match result.as_string() {
             Some(v) => Ok(v.to_std_string().map_err(|e| e.to_string())?),
