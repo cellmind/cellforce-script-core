@@ -73,7 +73,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     group.bench_function("run javascript replace", |b| {
         let script = r#"
     function replace(a) {
-        return a.replace("\<src-text\>", "\<target-text\>");
+        return a.replace("<src-text>", "<target-text>");
     }
     "#;
         let runner = ScriptFunctionRunnerBuilder::new()

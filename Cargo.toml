@@ -6,10 +6,9 @@ edition = "2021"
 [lib]
 
 [dependencies]
-tokio = { version = "1.41.0", features = ["macros", "rt-multi-thread"] }
 rhai = "1.20.0"
-rustpython = { version = "0.4.0", features = ["freeze-stdlib"] }
-rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] }
+rustpython = { version = "0.4.0", features = ["freeze-stdlib"], optional = true}
+rustpython-vm = { version = "0.4.0", features = ["freeze-stdlib"] , optional = true}
 boa_engine = { version = "0.19.0" }
 thiserror = "1.0.63"
 base64 = "0.22.1"
@@ -27,9 +26,13 @@ swc_ecma_visit = "5.0.0"
 
 
 [dev-dependencies]
+tokio = { version = "1.41.0", features = ["macros", "rt-multi-thread"] }
 criterion = "0.4"
 test-log = "0.2.10"
 pprof = { version = "0.11.0", features = ["flamegraph", "criterion"] }
+
+[features]
+python = ["rustpython", "rustpython-vm"]
 
 [[bench]]
 name = "scripts"
