@@ -99,6 +99,26 @@ pub fn criterion_benchmark(c: &mut Criterion) {
             let result = runner.map_in_str_out_str(long_text).unwrap();
         })
     });
+
+
+    group.bench_function("run golang replace", |b| {
+        let script = r#"
+    import "strings"
+    import "os"
+    func replace(s string) string {
+        v2 := strings.ReplaceAll(s, "<src-text>", "<target-text>")
+        return v2
+    }
+    "#;
+        let runner = ScriptFunctionRunnerBuilder::new()
+            .build("go", script, "replace")
+            .unwrap();
+
+        b.iter(|| {
+            let result = runner.map_in_str_out_str(long_text).unwrap();
+        })
+    });
+
     group.finish();
 }
 

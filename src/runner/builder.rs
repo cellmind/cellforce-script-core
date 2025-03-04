@@ -1,6 +1,7 @@
 use std::sync::Arc;
 use crate::runner::base::ScriptFunctionRunner;
 use crate::errors::ScriptError;
+use crate::runner::golang::GolangFunctionRunner;
 use crate::runner::javascript::JavaScriptFunctionRunner;
 
 #[cfg(feature = "python")]
@@ -39,6 +40,10 @@ impl ScriptFunctionRunnerBuilder {
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
             "ts" | "typescript" => Arc::new(TypeScriptFunctionRunner::try_new(
+                script.as_str(),
+                func,
+            )?) as Arc<dyn ScriptFunctionRunner>,
+            "go" | "golang" => Arc::new(GolangFunctionRunner::try_new(
                 script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,

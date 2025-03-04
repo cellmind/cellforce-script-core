@@ -1,0 +1,4 @@
+github.com/ihciah/rust2go v0.0.0-20250125181647-c5957947a3c0 h1:QSOzUVdJEGSO8bHmUoeUFM/i211lWLn9d1SDv8/S0DQ=
+github.com/ihciah/rust2go v0.0.0-20250125181647-c5957947a3c0/go.mod h1:SpcZZoVYDXYhx373JZ1onR8dnEcalKA0H61x/FJ9O0s=
+github.com/traefik/yaegi v0.16.1 h1:f1De3DVJqIDKmnasUF6MwmWv1dSEEat0wcpXhD2On3E=
+github.com/traefik/yaegi v0.16.1/go.mod h1:4eVhbPb3LnD2VigQjhYbEJ69vDRFdT2HQNrXx8eEwUY=
