@@ -1,9 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"reflect"
 	"sync"
-	"unsafe"
 
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
@@ -26,7 +26,13 @@ func init() {
 	offset = 0
 }
 
-func (GoScript) new_interpreter(req *NewGoScriptInterpreterRequest) NewGoScriptInterpreterResponse {
+func (GoScript) new_interpreter(req *NewGoScriptInterpreterRequest) (resp NewGoScriptInterpreterResponse) {
+	defer func() {
+		if r := recover(); r != nil {
+			resp = NewGoScriptInterpreterResponse{error: fmt.Sprintf("fail to create interpreter: %v", r)}
+		}
+	}()
+
 	interpreter := interp.New(interp.Options{})
 	restrictedSymbols := make(map[string]map[string]reflect.Value)
 	allowedPackages := []string{
@@ -58,16 +64,26 @@ func (GoScript) new_interpreter(req *NewGoScriptInterpreterRequest) NewGoScriptI
 	return NewGoScriptInterpreterResponse{error: "", ptr_offset: int32(current_offset)}
 }
 
-func (GoScript) free_interpreter(req *FreeGoScriptInterpreterRequest) FreeGoScriptInterpreterResponse {
+func (GoScript) free_interpreter(req *FreeGoScriptInterpreterRequest) (resp FreeGoScriptInterpreterResponse) {
+	defer func() {
+		if r := recover(); r != nil {
+			resp = FreeGoScriptInterpreterResponse{error: fmt.Sprintf("fail to free interpreter: %v", r)}
+		}
+	}()
 	interpreters[req.ptr_offset] = nil
 	return FreeGoScriptInterpreterResponse{error: ""}
 }
 
-func StringToBytes(s string) []byte {
-	return unsafe.Slice(unsafe.StringData(s), len(s))
-}
+func (GoScript) map_in_str_out_str(req *MapInStrOutStrRequest) (resp MapInStrOutStrResponse) {
+	defer func() {
+		if r := recover(); r != nil {
+			resp = MapInStrOutStrResponse{error: fmt.Sprintf("fail to map in str out str: %v", r)}
+		}
+	}()
 
-func (GoScript) map_in_str_out_str(req *MapInStrOutStrRequest) MapInStrOutStrResponse {
+	if req.ptr_offset < 0 || req.ptr_offset >= int32(len(functions)) {
+		return MapInStrOutStrResponse{error: "invalid pointer offset"}
+	}
 	fn_call, ok := functions[req.ptr_offset].(func(string) string)
 	if !ok {
 		return MapInStrOutStrResponse{error: "function not converted to func(string) string"}

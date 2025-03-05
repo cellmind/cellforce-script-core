@@ -19,13 +19,18 @@ fn main() {
     "#;
 
 
+    let timer = Instant::now();
+
     let runner = ScriptFunctionRunnerBuilder::new()
         .build("go", script, "replace")
         .unwrap();
 
+
+    println!("replace: {:?}", timer.elapsed());
+
     let timer = Instant::now();
 
-    for _ in 0..1000000 {
+    for _ in 0..10000000 {
         let result = runner.map_in_str_out_str(long_text).unwrap();
     }
 
@@ -33,7 +38,7 @@ fn main() {
 
 
     let timer = Instant::now();
-    for _ in 0..1000000 {
+    for _ in 0..10000000 {
         let result = long_text.replace("<src-text>", "<target-text>");
     }
     println!("replace: {:?}", timer.elapsed());
