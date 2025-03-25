@@ -14,15 +14,13 @@ thiserror = "1.0.63"
 base64 = "0.22.1"
 indexmap = "2.7.0"
 
-swc = "9.0.1"
-swc_core = "9.0.1"
-swc_common = { version = "5.0.0", features = ["tty-emitter"] }
-swc_ecma_ast = "5.0.0"
-swc_ecma_parser = { version = "6.0.1", features = ["verify", "typescript"] }
-swc_ecma_transforms_base = "6.0.2"
-swc_ecma_transforms_typescript = "6.0.0"
-swc_ecma_codegen = "5.0.0"
-swc_ecma_visit = "5.0.0"
+swc_core = "11.0.1"
+swc_common = { version = "8.0.1", features = ["tty-emitter"] }
+swc_ecma_parser = "10.0.2"
+swc_ecma_codegen = "8.0.2"
+swc_ecma_transforms_base = "11.2.0"
+swc_ecma_transforms_typescript = "12.0.1"
+
 
 rust2go = { version = "0.4.0"}
 uuid = {  version = "1.11.0" , features = ["v4"]}
