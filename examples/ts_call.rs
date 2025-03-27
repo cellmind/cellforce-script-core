@@ -1,5 +1,5 @@
 use std::time::Instant;
-use cellgen_script_core::runner::builder::ScriptFunctionRunnerBuilder;
+use cellforce_script_core::runner::builder::ScriptFunctionRunnerBuilder;
 
 fn main() {
     let long_text =

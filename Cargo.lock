@@ -557,7 +557,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "cellgen-script-core"
+name = "cellforce-script-core"
 version = "0.1.0"
 dependencies = [
  "base64 0.22.1",

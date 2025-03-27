@@ -2,7 +2,7 @@
 
 use std::path::PathBuf;
 use std::sync::Arc;
-use cellgen_script_core::runner::builder::ScriptFunctionRunnerBuilder;
+use cellforce_script_core::runner::builder::ScriptFunctionRunnerBuilder;
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 1)]
 async fn test_javascript() {

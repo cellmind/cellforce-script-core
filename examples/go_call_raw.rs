@@ -1,4 +1,4 @@
-use cellgen_script_core::runner::go::interpreter::{FreeGoScriptInterpreterRequest, GoScriptCall, GoScriptCallImpl, MapInStrOutStrRequest, NewGoScriptInterpreterRequest, NewGoScriptInterpreterResponse};
+use cellforce_script_core::runner::go::interpreter::{FreeGoScriptInterpreterRequest, GoScriptCall, GoScriptCallImpl, MapInStrOutStrRequest, NewGoScriptInterpreterRequest, NewGoScriptInterpreterResponse};
 
 #[tokio::main]
 async fn main() {
