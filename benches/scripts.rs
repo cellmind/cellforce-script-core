@@ -119,6 +119,21 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         })
     });
 
+    group.bench_function("run koto replace", |b| {
+        let script = r#"
+export replace = |s|
+    s.replace("<src-text>", "<target-text>")
+"#;
+        let runner = ScriptFunctionRunnerBuilder::new()
+            .build("koto", script, "replace")
+            .unwrap();
+
+        b.iter(|| {
+            let result = runner.map_in_str_out_str(long_text).unwrap();
+        })
+    });
+
+
     group.finish();
 }
 

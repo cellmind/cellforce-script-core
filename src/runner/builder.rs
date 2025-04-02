@@ -3,7 +3,7 @@ use crate::runner::base::ScriptFunctionRunner;
 use crate::errors::ScriptError;
 use crate::runner::golang::GolangFunctionRunner;
 use crate::runner::javascript::JavaScriptFunctionRunner;
-
+use crate::runner::koto::KotoFunctionRunner;
 #[cfg(feature = "python")]
 use crate::runner::python::PythonFunctionRunner;
 
@@ -44,6 +44,10 @@ impl ScriptFunctionRunnerBuilder {
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,
             "go" | "golang" => Arc::new(GolangFunctionRunner::try_new(
+                script.as_str(),
+                func,
+            )?) as Arc<dyn ScriptFunctionRunner>,
+            "koto" => Arc::new(KotoFunctionRunner::try_new(
                 script.as_str(),
                 func,
             )?) as Arc<dyn ScriptFunctionRunner>,

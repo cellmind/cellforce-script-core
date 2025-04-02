@@ -565,6 +565,8 @@ dependencies = [
  "cc",
  "criterion",
  "indexmap 2.8.0",
+ "indoc",
+ "koto",
  "pprof",
  "rhai",
  "rust2go",
@@ -651,6 +653,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "circular-buffer"
+version = "0.1.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b67261db007b5f4cf8cba393c1a5c511a5cc072339ce16e12aeba1d7b9b77946"
+
+[[package]]
 name = "clang-sys"
 version = "1.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -672,7 +680,7 @@ dependencies = [
  "bitflags 1.3.2",
  "strsim 0.8.0",
  "textwrap 0.11.0",
- "unicode-width",
+ "unicode-width 0.1.14",
  "vec_map",
 ]
 
@@ -988,6 +996,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "derive-name"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a19af109a7f1118ab96e1fd2a0c87310787f791680fa71b4bbfa5dffbc358b08"
+dependencies = [
+ "derive-name-macros",
+]
+
+[[package]]
+name = "derive-name-macros"
+version = "1.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa60999fb9292247d7c7eec5dada22b4ba337394612b0d935616bf49964c8bfd"
+dependencies = [
+ "quote",
+ "syn 2.0.100",
+]
+
+[[package]]
 name = "derive_builder"
 version = "0.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1093,6 +1120,18 @@ dependencies = [
  "socket2",
  "windows-sys 0.48.0",
 ]
+
+[[package]]
+name = "downcast-rs"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
+
+[[package]]
+name = "dunce"
+version = "1.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92773504d58c093f6de2459af4af33faa518c13451eb8f2b5698ed3d36e7c813"
 
 [[package]]
 name = "dyn-clone"
@@ -1282,7 +1321,7 @@ version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "14dbbfd5c71d70241ecf9e6f13737f7b5ce823821063188d7e46c41d371eebd5"
 dependencies = [
- "unicode-width",
+ "unicode-width 0.1.14",
 ]
 
 [[package]]
@@ -1629,6 +1668,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "indoc"
+version = "1.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bfa799dd5ed20a7e349f3b4639aa80d74549c81716d9ec4f994c9b5815598306"
+
+[[package]]
 name = "inferno"
 version = "0.11.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1653,6 +1698,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e0242819d153cba4b4b05a5a8f2a7e9bbf97b6055b2a002b395c96b5ff3c0222"
 dependencies = [
  "cfg-if",
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -1753,6 +1801,101 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ecc2af9a1119c51f12a14607e783cb977bde58bc069ff0c3da1095e635d70654"
 dependencies = [
  "cpufeatures",
+]
+
+[[package]]
+name = "koto"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3a5fe66b5e579d6ecac023e247082b6231c4107a64a9bcb6adfdcc79e8449963"
+dependencies = [
+ "koto_bytecode",
+ "koto_parser",
+ "koto_runtime",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "koto_bytecode"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d2b1fa20fff1df1e884be4905c303b71ddadca4ce7e90484d3a15d1416bcd894"
+dependencies = [
+ "circular-buffer",
+ "derive-name",
+ "dunce",
+ "koto_memory",
+ "koto_parser",
+ "rustc-hash 1.1.0",
+ "smallvec",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "koto_derive"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b52735b94ae7fd64ff6b6e275b1f6ce2ee91cd200276998238fe2a8b9c24a74f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.100",
+]
+
+[[package]]
+name = "koto_lexer"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9341bc62b4ef16b92c5ffceabc110da4727a73086d576cc01c249c37855927f8"
+dependencies = [
+ "unicode-segmentation",
+ "unicode-width 0.2.0",
+ "unicode-xid",
+]
+
+[[package]]
+name = "koto_memory"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "31a28e9ea7a03d55ed5e85f6bce5750217e29118f884b62e5056bb8300dff04a"
+dependencies = [
+ "parking_lot",
+]
+
+[[package]]
+name = "koto_parser"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f4655c4a34f6fa77b82628a55b08768db6b037191236adeb5814906cf79530c6"
+dependencies = [
+ "derive-name",
+ "koto_lexer",
+ "koto_memory",
+ "smallvec",
+ "thiserror 1.0.69",
+ "unicode-segmentation",
+]
+
+[[package]]
+name = "koto_runtime"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88873c10c0b9101a92db8b9e827d00d485f108c3426bb13de2f7ac0fa3896b74"
+dependencies = [
+ "chrono",
+ "downcast-rs",
+ "indexmap 2.8.0",
+ "instant",
+ "koto_bytecode",
+ "koto_derive",
+ "koto_lexer",
+ "koto_memory",
+ "koto_parser",
+ "rustc-hash 1.1.0",
+ "saturating_cast",
+ "smallvec",
+ "thiserror 1.0.69",
+ "unicode-segmentation",
 ]
 
 [[package]]
@@ -3303,7 +3446,7 @@ dependencies = [
  "nix 0.28.0",
  "radix_trie",
  "unicode-segmentation",
- "unicode-width",
+ "unicode-width 0.1.14",
  "utf8parse",
  "windows-sys 0.52.0",
 ]
@@ -3328,6 +3471,12 @@ checksum = "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502"
 dependencies = [
  "winapi-util",
 ]
+
+[[package]]
+name = "saturating_cast"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fc4972f129a0ea378b69fa7c186d63255606e362ad00795f00b869dea5265eb"
 
 [[package]]
 name = "schannel"
@@ -3702,7 +3851,7 @@ dependencies = [
  "swc_visit",
  "termcolor",
  "tracing",
- "unicode-width",
+ "unicode-width 0.1.14",
  "url",
 ]
 
@@ -4126,7 +4275,7 @@ version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d326610f408c7a4eb6f51c37c330e496b08506c9457c9d34287ecc38809fb060"
 dependencies = [
- "unicode-width",
+ "unicode-width 0.1.14",
 ]
 
 [[package]]
@@ -4604,6 +4753,12 @@ name = "unicode-width"
 version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af"
+
+[[package]]
+name = "unicode-width"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1fc81956842c57dac11422a97c3b8195a1ff727f06e85c84ed2e8aa277c9a0fd"
 
 [[package]]
 name = "unicode-xid"
